@@ -25,8 +25,6 @@ class Loginscreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Icon(Icons.lock_outline, size: 64, color: Colors.deepPurple),
-              const SizedBox(height: 16),
               Text(
                 "Welcome Back Vietalk 👋",
                 style: theme.textTheme.headlineSmall?.copyWith(
@@ -35,6 +33,8 @@ class Loginscreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 16),
+              Image.asset("assets/images/Logo_full.png", height: 120),
               const SizedBox(height: 8),
               Text(
                 "Login to your account to continue",

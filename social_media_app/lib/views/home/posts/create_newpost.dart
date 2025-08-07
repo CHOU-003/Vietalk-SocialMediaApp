@@ -63,8 +63,8 @@ class PostCreationScreen extends StatelessWidget {
                                 alignment: Alignment.topRight,
                                 children: [
                                   file.path.endsWith('.mp4')
-                                  ? VideoPreview(file: file)
-                                  : ImagePreview(file: file),
+                                      ? VideoPreview(file: file)
+                                      : ImagePreview(file: file),
                                   IconButton(
                                     onPressed: () {
                                       postprovider.removeImage(file);
@@ -84,19 +84,30 @@ class PostCreationScreen extends StatelessWidget {
               SizedBox(height: 16),
               Consumer<PostProvider>(
                 builder: (context, postprovider, _) {
-                  return postprovider.isLoading ? Center(child: CircularProgressIndicator(),) : ElevatedButton(onPressed:() async {
-                    bool success = await postprovider.savePost();
-                    if(success) {
-                      postprovider.setPostText('');
-                      postprovider.clearImage();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Post Saved Successfully.")));
-                      Navigator.pop(context);
-                    } else {
-                      // ignore: use_build_context_synchronously
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to save Post.")));
-                    }
-                  }, child: Text('Post/Save'));
-                }
+                  return postprovider.isLoading
+                      ? Center(child: CircularProgressIndicator())
+                      : ElevatedButton(
+                        onPressed: () async {
+                          bool success = await postprovider.savePost();
+                          if (success) {
+                            postprovider.setPostText('');
+                            postprovider.clearImage();
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("Post Saved Successfully."),
+                              ),
+                            );
+                            Navigator.pop(context);
+                          } else {
+                            // ignore: use_build_context_synchronously
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Failed to save Post.")),
+                            );
+                          }
+                        },
+                        child: Text('Post/Save'),
+                      );
+                },
               ),
             ],
           ),
@@ -105,4 +116,3 @@ class PostCreationScreen extends StatelessWidget {
     );
   }
 }
-

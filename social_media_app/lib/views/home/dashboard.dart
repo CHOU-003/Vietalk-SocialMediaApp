@@ -6,6 +6,7 @@ import 'package:social_media_app/views/home/home_feeds.dart';
 import 'package:social_media_app/views/home/posts/create_newpost.dart';
 import 'package:social_media_app/views/profile/profile_Screen.dart';
 import 'package:social_media_app/views/settings/settings_Screen.dart';
+import 'package:social_media_app/controllers/theme_provider.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -20,7 +21,7 @@ class Dashboard extends StatelessWidget {
       ProfileScreen(),
       SettingsScreen(),
     ];
-    final titles = ['feeds', 'friend List', 'profiles', 'settings'];
+    final titles = ['VIETALK', 'friend List', 'profiles', 'settings'];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.cardColor,
@@ -31,6 +32,23 @@ class Dashboard extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+        actions: [
+          Consumer<ThemeProvider>(
+            builder: (context, themeProvider, _) {
+              final isDarkMode = themeProvider.themeMode == ThemeMode.dark;
+              return IconButton(
+                icon: Icon(
+                  isDarkMode ? Icons.dark_mode : Icons.light_mode,
+                  color: theme.iconTheme.color,
+                ),
+                onPressed: () {
+                  themeProvider.toggleTheme(!isDarkMode);
+                },
+              );
+            },
+          ),
+          SizedBox(width: 12), // khoảng cách phải
+        ],
       ),
       body: SafeArea(child: pages[navigationbarProvider.currentIndex]),
       floatingActionButton: FloatingActionButton(
