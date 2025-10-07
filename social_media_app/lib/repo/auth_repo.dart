@@ -14,7 +14,7 @@ class Authrepo {
       Uri.parse("$apiUrl$registerUrl"),
       body: jsonEncode(body),
       headers: {
-        'Content-Type': 'application/json', // Example: Setting content type
+        'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
     );
